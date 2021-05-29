@@ -15,13 +15,18 @@ services:
       - php
       - mysql
   php:
-    build:
-      context: .
-      dockerfile: dockerfiles/php.dockerfile
+    build: .
+      # context: .
+      # dockerfile: dockerfiles/php.dockerfile
     volumes:
       - ./fuelcms:/var/www/html:delegated
     depends_on: 
       - mysql
+    environment: 
+      DATABASE_NAME: fuel
+      DATABASE_USER: fuel
+      DATABASE_PASSWORD: secret
+      DATABASE_HOST: mysql
   mysql:
     image: mysql:5.7
     env_file:
